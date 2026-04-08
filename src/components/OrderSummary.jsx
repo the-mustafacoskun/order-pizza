@@ -1,158 +1,115 @@
+import React from 'react';
 
-import React from 'react'
-import { NumberField } from '@base-ui/react/number-field'
-import styled from 'styled-components';
-import { Button, Card, CardBody } from 'reactstrap';
-
-// İkonlar tek bir genel bileşen üzerinden de yönetilebilir ama temiz durması için kalsın dedik:
+// --- İkon Bileşenleri ---
 const PlusIcon = () => (
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M0 5H10M5 0V10" />
     </svg>
-)
+);
 
 const MinusIcon = () => (
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M0 5H10" />
     </svg>
-)
+);
 
-const OrderSummaryWrapper = styled.div`
-    display:flex;
-    margin:0 auto;
-    justify-content:flex-start;
-    align-items:flex-start;
-    gap:10px;
-    justify-content:center;
-    @media (max-width: 768px){
-        flex-direction: column;
-    }
-
-`;
-const WebCounterWrapper=styled.div`
-     @media (max-width: 768px){
-        display: none;
-    }
-`;
-
-const MobileCounterWrapper=styled.div`
-    display:none;
-
-    @media(max-width: 768px){
-    display:block;
-    margin-right:10px;
-    }
-`;
-const MobileActionWrapper =styled.div`
-    display:flex;
-    flex-direction:column;
-
-    @media(max-width: 768px){
-    flex-direction:row;
-    width:100%;
-    align-items:center;
-    margin-top:20px;
-    }
-`;
-const RightWrapper = styled.div`
-    width:350px;
-
-    @media(max-width: 768px){
-        width:100%;
-    }
-`;
-
-
-
-const IncrementDecrementButtonWithText = () => {
+// --- Sayaç Bileşeni ---
+const IncrementDecrementButton = ({ value, setValue }) => {
     return (
-        <div className="flex justify-center items-center">
-            <NumberField.Root defaultValue={1} min={1}>
-                <NumberField.Group className="flex items-center rounded-md overflow-hidden border border-gray-200 shadow-sm bg-white">
-
-                    <NumberField.Decrement className="flex size-14 items-center justify-center bg-[#FDC913] hover:bg-amber-500 active:bg-amber-600 transition-colors">
-                        <MinusIcon />
-                    </NumberField.Decrement>
-
-                    <NumberField.Input className="h-10 w-12 text-center font-semibold tabular-nums focus:outline-none" />
-
-                    <NumberField.Increment className="flex size-14 items-center justify-center bg-[#FDC913] hover:bg-amber-500 active:bg-amber-600 transition-colors">
-                        <PlusIcon />
-                    </NumberField.Increment>
-
-                </NumberField.Group>
-            </NumberField.Root>
+        <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden h-12 md:h-14">
+            <button
+                type="button"
+                onClick={() => setValue(Math.max(1, value - 1))}
+                className="flex items-center justify-center w-12 md:w-14 h-full bg-[#FDC913] hover:bg-amber-500 active:bg-amber-600 transition-all"
+            >
+                <MinusIcon />
+            </button>
+            <input
+                type="text"
+                value={value}
+                readOnly
+                className="w-10 md:w-14 text-center font-bold text-lg text-[#292929] bg-transparent focus:outline-none select-none tabular-nums"
+            />
+            <button
+                type="button"
+                onClick={() => setValue(value + 1)}
+                className="flex items-center justify-center w-12 md:w-14 h-full bg-[#FDC913] hover:bg-amber-500 active:bg-amber-600 transition-all"
+            >
+                <PlusIcon />
+            </button>
         </div>
-    )
+    );
 };
-const OrderSummaryCard = () => {
-    return (
-        <div>
-            <Card className="border-0 shadow-sm" style={{ backgroundColor: '#FAF7F2' }}>
-                <CardBody className="p-4">
-                    <h5 className="fw-bold mb-4">Sipariş Toplamı</h5>
 
-                    {/* Seçimler Satırı */}
-                    <div className="d-flex justify-content-between mb-3 text-secondary">
-                        <span>Seçimler</span>
-                        <span>25.00₺</span>
-                    </div>
+// --- Sipariş Özeti Kartı (Artık Propları Alıyor) ---
+const OrderSummaryCard = ({ secimlerFiyat, toplamFiyat }) => {
+  return (
+    <div className="w-full !bg-[#FAF7F2] !border !border-gray-200 !shadow-sm !rounded-lg md:!rounded-b-none !p-8 !flex !flex-col !justify-between !min-h-[200px]">
+      <h5 className="!text-xl !font-bold !mb-8 !text-[#292929] !font-barlow">
+        Sipariş Toplamı
+      </h5>
+      <div className="!space-y-4">
+        <div className="!flex !justify-between !text-gray-500 !font-semibold !font-barlow">
+          <span>Seçimler</span>
+          <span>{secimlerFiyat.toFixed(2)}₺</span>
+        </div>
+        <div className="!flex !justify-between !font-bold !text-[#CE2829] !text-xl !font-barlow">
+          <span>Toplam</span>
+          <span>{toplamFiyat.toFixed(2)}₺</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-                    {/* Toplam Satırı */}
-                    <div className="d-flex justify-content-between fw-bold" style={{ color: '#D32F2F' }}>
-                        <span>Toplam</span>
-                        <span>110.50₺</span>
-                    </div>
-                </CardBody>
-            </Card >
+// --- Ana Bileşen ---
+export default function OrderSummary({ count, setCount, secimlerFiyat, toplamFiyat, isActive, loading }) {
+  // NOT: Kendi içindeki state'i sildik, artık her şey prop'tan geliyor.
+  
+
+  return (
+    <div className="!w-full !bg-white !py-10">
+      <div className="!flex !flex-col md:!flex-row !justify-center !items-start !gap-4 !mx-auto !max-w-4xl !px-4">
+        
+        {/* Masaüstü Sayacı */}
+        <div className="!hidden md:!block">
+          <IncrementDecrementButton value={count} setValue={setCount} />
         </div>
 
+        {/* Sağ Taraf: Kart ve Buton */}
+        <div className="!w-full md:!w-[380px] !flex !flex-col !gap-0">
+          
+          <OrderSummaryCard 
+            secimlerFiyat={secimlerFiyat} 
+            toplamFiyat={toplamFiyat} 
+          />
 
+          <div className="!flex !flex-row md:!flex-col !items-center !mt-4 md:!mt-0 !gap-3 md:!gap-0">
+            
+            {/* Mobil Sayacı */}
+            <div className="!block md:!hidden">
+              <IncrementDecrementButton value={count} setValue={setCount} />
+            </div>
 
-
-    )
-};
-const PlaceOrderButton = ({className}) => {
-    return (
-        <Button
-            className={`w-100 py-3 border-0 fw-bold ${className}`}
-            style={{
-                backgroundColor: '#FDC913',
-                color: '#292929',
-                fontSize: '18px'
-            }}
-        >
-            SİPARİŞ VER
-        </Button>
-    )
-}
-const ResponsiveOrderButton = styled(PlaceOrderButton)`
-
-    @media(max-width:768px){
-        height:56px !important;
-        border-radius:6px !important;
-    }
-`;
-
-
-export default function OrderSummary() {
-    return (
-
-        <OrderSummaryWrapper>
-            <WebCounterWrapper>
-                <IncrementDecrementButtonWithText />
-            </WebCounterWrapper>
-            <RightWrapper>
-                <OrderSummaryCard />
-                <MobileActionWrapper>
-                    <MobileCounterWrapper>
-                         <IncrementDecrementButtonWithText />
-                    </MobileCounterWrapper>
-                    <ResponsiveOrderButton />
-                </MobileActionWrapper>
-            </RightWrapper>
-
-        </OrderSummaryWrapper>
-
-    )
+            {/* Sipariş Butonu - KRİTİK DÜZELTMELER YAPILDI */}
+            <button
+              type="submit"
+              disabled={!isActive || loading} // Şartlar sağlanmazsa TIKLANAMAZ yapar
+              className={`
+                !flex-1 md:!w-full !font-bold !py-4 !px-8 
+                !rounded-lg md:!rounded-t-none md:!rounded-b-lg 
+                !transition-all !text-lg !shadow-md !font-barlow !uppercase !h-[56px] md:!h-auto !border-none
+                ${isActive && !loading
+                    ? "!bg-[#FDC913] !text-[#292929] !cursor-pointer hover:!bg-amber-500 active:!scale-[0.98]"
+                    : "!bg-gray-300 !text-gray-500 !cursor-not-allowed !opacity-60"
+                }
+              `}
+            >
+              {loading ? "Gönderiliyor..." : "Sipariş Ver"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

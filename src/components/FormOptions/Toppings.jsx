@@ -1,121 +1,85 @@
-import React from 'react'
-import Checkbox from '@mui/material/Checkbox'
-import Box from '@mui/material/Box'
-import CheckIcon from '@mui/icons-material/Check'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import styled from 'styled-components'
+import React from 'react';
 
-const ToppingsWrapper = styled.div`
-    display:flex;
-    justify-content:center;
-    flex-direction:column;
-    
-    margin:20px auto;
-    font-family:'Barlow', sans-serif;
+// --- Checkbox İçin Özel İkon Bileşeni ---
+const CustomCheckbox = ({ id, label, checked, onChange }) => {
+  return (
+    <label className="!flex !items-center !gap-3 !cursor-pointer !group !w-full !m-0 !p-0">
+      <div className="!relative !flex !items-center !justify-center !flex-shrink-0">
+        <input
+          type="checkbox"
+          id={id}
+          className="!sr-only" // Standart checkbox'ı gizle
+          checked={checked}
+          onChange={onChange}
+        />
+        {/* Tasarımdaki Kutu */}
+        <div className={`
+          !w-10 !h-10 !rounded-lg !transition-all !duration-200 !flex !items-center !justify-center
+          ${checked 
+            ? "!bg-[#FDC913] !shadow-none" 
+            : "!bg-[#FAF7F2] !shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]"
+          }
+        `}>
+          {/* Check İkonu */}
+          {checked && (
+            <svg 
+              className="!w-6 !h-6 !text-[#292929]" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="4"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </div>
+      </div>
+      <span className="!text-[#5F5F5F] !font-bold !text-base !font-barlow">{label}</span>
+    </label>
+  );
+};
 
-`;
-const ToppingsTitle = styled.span`
-    
-    justify-content:flex-start;
-    font-size: 1.25rem;
-    font-weight: 700;
-`;
-const ToppingsSubtitle = styled.span`
-    font-size: rem;
-    font-weight: 500;
-    margin-top: 10px;
+export default function Toppings({ selectedToppings, onChange }) {
+  const toppingsList = [
+    "Pepperoni", "Sosis", "Kanada Jambonu", "Tavuk Izgara", "Soğan", 
+    "Domates", "Mısır", "Sucuk", "Jalepeno", "Sarımsak", 
+    "Biber", "Ananas", "Patlıcan", "Kabak"
+  ];
 
-`;
+  const handleToggle = (topping) => {
+    // 10'dan fazla seçimi engelleme kuralı
+    if (!selectedToppings.includes(topping) && selectedToppings.length >= 10) {
+      alert("En fazla 10 malzeme seçebilirsiniz.");
+      return;
+    }
+    onChange(topping); // OrderForm'daki handleChange'e gönderir
+  };
 
-const customIcon = (
-    <Box
-        sx={{
-            width: 45,
-            height: 45,
-            backgroundColor: '#FAF7F2',
-            borderRadius: 1,
-            boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.1)',
-        }}
-    />
-)
+  return (
+    <section className="!flex !flex-col !w-full !font-barlow">
+      
+      {/* Başlık Alanı */}
+      <div className="!mb-6">
+        <h3 className="!text-xl !font-bold !text-[#292929] !mb-1">Ek Malzemeler</h3>
+        <p className="!text-sm !font-medium !text-[#5F5F5F]">
+          En az 4, en fazla 10 malzeme seçebilirsiniz. 5₺
+        </p>
+      </div>
 
-const customCheckedIcon = (
-    <Box
-        sx={{
-            width: 45,
-            height: 45,
-            backgroundColor: '#FDC913',
-            borderRadius: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}
-    >
-        <CheckIcon sx={{ color: 'rgba(0, 0, 0, 0.8)', fontSize: 32 }} />
-    </Box>
-)
+      {/* Grid Yapısı (Her Zaman 3 Sütun - Figma Uyumlu) */}
+      <div className="!grid !grid-cols-2 md:!grid-cols-3 !gap-y-4 !gap-x-2">
+        {toppingsList.map((topping, index) => (
+          <div key={index} className="!flex !items-start">
+            <CustomCheckbox
+              id={`topping-${index}`}
+              label={topping}
+              checked={selectedToppings.includes(topping)}
+              onChange={() => handleToggle(topping)}
+            />
+          </div>
+        ))}
+      </div>
 
-export default function Toppings() {
-    const totalItems = 14;
-
-    return (
-        <ToppingsWrapper>
-            <ToppingsTitle>Ek Malzemeler</ToppingsTitle>
-            <ToppingsSubtitle>En Fazla 10 malzeme seçebilirsiniz. 5₺</ToppingsSubtitle>
-            <Box sx={{ p: 4, px: 0, display: 'flex', justifyContent: 'center' }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap', // Elemanlar sığmayınca alt satıra geçer
-                        justifyContent: 'flex-start',
-                        maxWidth: 900,
-                        width: '100%',
-                        gap: 2, // Elemanlar arası boşluk
-                        pl: 0
-                    }}
-                >
-                    {Array.from({ length: totalItems }).map((_, index) => (
-                        <Box
-                            key={index}
-                            sx={{
-                                // Mobil (xs): %100 (tek sütun)
-                                // Tablet (sm): %48 (iki sütun)
-                                // Masaüstü (md): %31 (üç sütun - gap hesabı dahil yaklaşık değer)
-                                width: {
-                                    xs: '100%',
-                                    sm: 'calc(50% - 16px)',
-                                    md: 'calc(33.33% - 11px)'
-                                },
-                                display: 'flex',
-                                alignItems: 'flex-start'
-                            }}
-                        >
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        icon={customIcon}
-                                        checkedIcon={customCheckedIcon}
-                                        
-                                        sx={{ padding: 0.5 }}
-                                    />
-                                }
-                                label={`Checkbox ${index + 1}`}
-                                sx={{
-                                    ml: 0, // 1. ÖNEMLİ: Label'ın solundaki varsayılan margin'i sıfırlar
-                                    mr: 2, // Sağ taraftaki yazı ile mesafe bırakır
-                                    width: '100%', // Tıklama alanını genişletir
-                                }}
-                            />
-                        </Box>
-                    ))}
-                    <Box
-                        sx={{
-                            width: 'calc(33.33% - 11px)',
-                            display: { xs: 'none', md: 'block' }
-                        }}
-                    />
-                </Box>
-            </Box>
-        </ToppingsWrapper>
-    )
+    </section>
+  );
 }

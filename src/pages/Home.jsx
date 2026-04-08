@@ -1,3 +1,13 @@
+import HomeBanner from "../components/HomeOptions/HomeBanner";
+import MainCampaignAndCards from "../components/HomeOptions/MainCampaignAndCards";
+import UpperNavbar from "../components/HomeOptions/UpperNavbar";
+
 export default function Home(){
-    return <h1>Ana Sayfa Yüklendi</h1>
+    return (
+        <div>
+            <HomeBanner/>
+            <UpperNavbar/>
+            <MainCampaignAndCards/>
+        </div>
+    )
 }
