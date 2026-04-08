@@ -10,14 +10,13 @@ export default function Success() {
     const orderData = location.state?.orderData;
 
     return (
-        <div className="!min-h-screen !bg-[#CE2829] !flex !flex-col !items-center !py-20 !text-center !font-barlow">
-            <h2 className="!text-white !text-3xl !font-light !tracking-widest !uppercase !mb-10 !border-b !border-white/30 !pb-10">
-                Siparişiniz Alındı!
+        <div className="!min-h-screen !bg-[#CE2829] !flex !flex-col !items-center !py-20 !text-center !font-roboto !px-4">
+            <h2 className="!text-white !text-6xl !font-light !tracking-widest  !mb-1 !border-b !border-white/30 !pb-10">
+                SİPARİŞ ALINDI
             </h2>
 
             {orderData ? (
                 <div className="!w-full !max-w-[400px] !space-y-6">
-                    {/* Bileşenlere veriyi prop olarak geçiyoruz */}
                     <OrderDetails orderData={orderData} />
                     <PaymentSummary orderData={orderData} />
                 </div>

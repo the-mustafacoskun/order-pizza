@@ -1,53 +1,50 @@
 import React from 'react';
 
 export default function OrderDetails({ orderData }) {
-    // OrderForm'dan gelen property isimlerine göre (malzemeler, not vb.) karşılayalım
     const {
         boyut = "-",
         hamur = "-",
-        malzemeler = [], // OrderForm'da "malzemeler" olarak gönderdik
-        adet = 1,
+        malzemeler = [],
         not = ""
     } = orderData || {};
 
     return (
-        <div className="!block !p-6 !bg-[#CE2829] !text-white !rounded-lg !shadow-lg !font-barlow !w-full !max-w-[300px] !mx-auto !my-5">
+        <div className="!block !text-white !font-barlow !w-full !max-w-[400px] !mx-auto">
             
-            <h5 className="!text-xl !font-bold !mb-6 !border-b !border-white/20 !pb-2 !text-left">
-                Sipariş Detayı
+            {/* Pizza İsmi - Resimdeki gibi ortalı */}
+            <h5 className="!text-xl !font-bold !mb-12 !font-roboto !text-center">
+                Position Absolute Acı Pizza
             </h5>
             
-            <div className="!space-y-4 !text-base">
-                <p className="!flex !justify-between !items-center !gap-4">
-                    <span className="!font-semibold">Boyut:</span> 
-                    <span className="!font-light !capitalize">{boyut}</span>
+            {/* Detay Bloğu - İçerik sola hizalı */}
+            <div className="!flex !flex-col !items-start !justify-start !pl-10 md:!pl-20 !space-y-5 !text-sm gap-4 max-w-[230px]">
+                
+                {/* Boyut Satırı */}
+                <p className="!m-0">
+                    <span className="!font-normal !opacity-90">Boyut:</span> 
+                    <span className="!font-bold !ml-2">{boyut}</span>
                 </p>
 
-                <p className="!flex !justify-between !items-center !gap-4">
-                    <span className="!font-semibold">Hamur:</span> 
-                    <span className="!font-light">{hamur}</span>
+                {/* Hamur Satırı */}
+                <p className="!m-0">
+                    <span className="!font-normal !opacity-90">Hamur:</span> 
+                    <span className="!font-bold !ml-2">{hamur}</span>
                 </p>
 
-                <p className="!flex !justify-between !items-center !gap-4">
-                    <span className="!font-semibold">Miktar:</span> 
-                    <span className="!font-light">{adet} Adet</span>
-                </p>
-
-                {/* Ek Malzemeler */}
-                <div className="!mt-4 !pt-4 !border-t !border-white/10">
-                    <p className="!font-semibold !mb-2">Ek Malzemeler:</p>
-                    <p className="!text-sm !font-light !leading-relaxed !opacity-90">
+                {/* Ek Malzemeler Satırı */}
+                <div className="!text-left !max-w-[300px]">
+                    <span className="!font-normal !opacity-90">Ek Malzemeler:</span> 
+                    <span className="!font-bold !ml-2 !leading-relaxed">
                         {malzemeler.length > 0 
                             ? malzemeler.join(", ") 
                             : "Malzeme seçilmedi"}
-                    </p>
+                    </span>
                 </div>
 
-                {/* Sipariş Notu (Eğer varsa gösterilir) */}
+                {/* Sipariş Notu */}
                 {not && (
-                    <div className="!mt-4 !pt-2">
-                        <p className="!font-semibold !text-sm">Not:</p>
-                        <p className="!text-xs !italic !opacity-80 !break-words">
+                    <div className="!mt-4 !text-left !opacity-80 !max-w-[280px]">
+                        <p className="!text-sm !italic !break-words">
                             "{not}"
                         </p>
                     </div>

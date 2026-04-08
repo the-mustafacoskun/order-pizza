@@ -18,7 +18,7 @@ export default function OrderForm() {
     const [loading, setLoading] = useState(false);
     const [fiyatlar, setFiyatlar] = useState({ secimler: 0, toplam: 0 });
 
-    const tabanFiyat = 85.50;
+    const tabanFiyat = 100.00;
     const malzemeBirimFiyat = 5.00;
 
     const errors = {
@@ -51,33 +51,34 @@ export default function OrderForm() {
 
     const handleSubmit = async (e) => {
         if (e) e.preventDefault();
+        if (!isValid || loading) return;
 
-        if (!isValid || loading) {
-            console.warn("Formda eksik bilgi var, gönderim durduruldu.");
-            return;
+        setLoading(true);
+        const orderData = {
+            boyut,
+            hamur,
+            malzemeler: toppings,
+            not: orderNote,
+            adet: pizzaAdet,
+            toplam: fiyatlar.toplam,
+            secimlerFiyat: fiyatlar.secimler
+        };
+
+        try {
+            const response = await axios.post(
+                "https://reqres.in/api/users",
+                orderData,
+                { headers: { "Content-Type": "application/json", "x-api-key": "pro_c59fbc687068826ffafc7753b4f25523bd4ed43488a5e6a1c7087cfb6fc0f53e" } }
+            );
+            console.log("Gönderilen Veri:", orderData);
+            history.push("/success", { orderData: response.data });
+            console.log("Sipariş Başarılı:", response.data);
+        } catch (error) {
+            console.error("API Hatası:", error);
+            
+        } finally {
+            setLoading(false);
         }
-
-        // Doğrudan yönlendirme yapıyoruz (API kısmı devre dışı)
-        console.log("Success sayfasına yönlendiriliyor...");
-        
-        history.push("/success", { 
-            orderData: { 
-                boyut, 
-                hamur, 
-                malzemeler: toppings, 
-                not: orderNote, 
-                adet: pizzaAdet,
-                toplam: fiyatlar.toplam
-            } 
-        });
-
-        /* Gelecekte API eklemek istersen burayı kullanabilirsin:
-           setLoading(true);
-           try {
-               const response = await axios.post("URL", payload);
-               // işlemler...
-           } catch(e) { } 
-        */
     };
 
     return (
