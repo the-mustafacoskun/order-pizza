@@ -50,6 +50,7 @@ const OrderSummaryCard = ({ secimlerFiyat, toplamFiyat }) => {
       </h5>
       <div className="space-y-4">
         <div className="flex justify-between text-gray-500 font-semibold font-barlow">
+           {/* Fiyatı 2 Ondalık Basamakla Gösteriyoruz */ }
           <span>Seçimler</span>
           <span>{secimlerFiyat.toFixed(2)}₺</span>
         </div>
@@ -64,21 +65,24 @@ const OrderSummaryCard = ({ secimlerFiyat, toplamFiyat }) => {
 
 // --- Ana Bileşen ---
 export default function OrderSummary({ count, setCount, secimlerFiyat, toplamFiyat, isActive, loading }) {
-  // NOT: Kendi içindeki state'i sildik, artık her şey prop'tan geliyor.
+  // NOT: her şey prop'tan geliyor orderformdan .
 
 
   return (
     <div className="w-full bg-white ">
       <div className="flex flex-col md:flex-row justify-center items-start gap-4 mx-auto max-w-4xl px-4">
 
-        {/* Masaüstü Sayacı */}
+        {/* masaüstü Sayacı 
+          Mobilde: hidden sınıfı baskındır, sayaç görünmez.
+          Masaüstünde (768px+): md:block devreye girer ve hidden özelliğini iptal eder. Sayaç görünür.
+        */}
         <div className="hidden md:block">
           <IncrementDecrementButton value={count} setValue={setCount} />
         </div>
 
         {/* Sağ Taraf: Kart ve Buton */}
         <div className="w-full md:w-[380px] flex flex-col gap-0">
-
+            {/* Sipariş Özeti Kartı ve yukarda tanımlı proplarını gönderiyoruz*/}
           <OrderSummaryCard
             secimlerFiyat={secimlerFiyat}
             toplamFiyat={toplamFiyat}
@@ -91,7 +95,7 @@ export default function OrderSummary({ count, setCount, secimlerFiyat, toplamFiy
               <IncrementDecrementButton value={count} setValue={setCount} />
             </div>
 
-            {/* Sipariş Butonu - KRİTİK DÜZELTMELER YAPILDI */}
+            {/* Sipariş Butonu */}
             <button
               data-cy="submit-order-button"
               type="submit"

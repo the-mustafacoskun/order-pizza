@@ -1,4 +1,4 @@
-describe('Pizza Order Form Spec', () => {
+describe('Pizza Order Validation Check', () => {
   
   beforeEach(() => {
     // Arrange: Visit the pizza order page before each test
@@ -7,10 +7,10 @@ describe('Pizza Order Form Spec', () => {
 
   it('validates that the name input accepts text correctly', () => {
     // Act: Type into the name field
-    cy.get('[data-cy="name-input"]').type('Cypress Test');
+    cy.get('[data-cy="name-input"]').type('Mustafa');
     
     // Assert: Check if the value matches the input
-    cy.get('[data-cy="name-input"]').should('have.value', 'Cypress Test');
+    cy.get('[data-cy="name-input"]').should('have.value', 'Mustafa');
   });
 
   it('validates that checkboxes can be checked and unchecked', () => {
@@ -49,5 +49,34 @@ describe('Pizza Order Form Spec', () => {
     
     // Final Assert: Confirm order success message is visible
     cy.contains('SİPARİŞ ALINDI').should('be.visible');
+  });
+});
+describe('Pizza Sipariş Formu Hata Kontrolleri', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173'); // ana sayfaya git
+  });
+  it('hata mesajlarını gösterir', () => {
+    cy.get('[data-cy="home-order-button"]').click(); // ana sayfadaki sipariş butonuna tıkla
+    cy.contains('Lütfen adınızı giriniz.').should('be.visible');
+    cy.contains('Lütfen pizza boyutu seçiniz.').should('be.visible');
+    cy.contains('En az 4 malzeme seçmelisiniz.').should('be.visible');  
+    
+  });
+});
+
+
+
+
+describe('Pizza Sipariş Formu Hata Kontrolleri', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173/pizza'); // Form sayfasına git
+  });
+
+  it('İsim alanı 3 karakterden az olduğunda hata vermeli', () => {
+    cy.get('[data-cy="name-input"]').type('Ab'); // Sadece 2 karakter
+    cy.get('[data-cy="submit-order-button"]').should('be.disabled'); // Sipariş butonu devre dışı kalmalı
+    cy.contains('Lütfen adınızı giriniz.').should('be.visible'); // Hata mesajı görünmeli
+    cy.get('[data-cy="name-input"]').type('c'); // 3. karakteri ekle
+    cy.contains('Lütfen adınızı giriniz.').should('not.exist');
   });
 });

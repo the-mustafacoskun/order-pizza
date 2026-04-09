@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 
 export default function SizeAndCrust({ selectedSize, selectedCrust, onChange }) {
+  {/*order form'daki handleChange fonksiyonunu kullanarak boyut ve hamur seçimlerini yönetiyoruz.
+    proplar karşılanıyor burada orderform dan gelen*/}
+
+  {/* Hamur seçimi için basit bir dropdown yapısı oluşturduk.
+     Dropdown'un açık/kapalı durumunu yönetmek için useState kullandık.
+    Dropdown açıldığında seçenekler görünür hale gelir ve bir seçenek seçildiğinde 
+    hem hamur bilgisi güncellenir hem de dropdown kapanır. */}
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  {/*boyut ve hamur seçeneklerini sabit bir array olarak tanımladık.
+  Bu sayede yeni bir seçenek eklemek istediğimizde sadece bu array'e ekleme yapmamız yeterli olur.
+  map kullanacağımız için elemanlara id değerleri veriyoruz. 
+  key attribute'unda kullanacağız aynı zamanda radio buttonlarda bu keyleri gösterdik. */}
   const sizes = [{ id: 'S', label: 'Küçük' }, { id: 'M', label: 'Orta' }, { id: 'L', label: 'Büyük' }];
   const crusts = [{ id: 'İnce-Kenar', label: 'İnce Kenar' }, { id: 'Normal-Kenar', label: 'Normal Kenar' }, { id: 'Kalin-Kenar', label: 'Kalın Kenar' }];
 
@@ -10,6 +21,9 @@ export default function SizeAndCrust({ selectedSize, selectedCrust, onChange }) 
       <div className="!flex-1">
         <h3 className="!text-xl !font-bold">Boyut Seç *</h3>
         <div className="!flex !gap-3 !mt-4">
+           {/* Boyut seçenekleri için basit butonlar kullanıyoruz. Seçili olan butonun arka plan rengini değiştiriyoruz. 
+           aynı zamanda radio buttonlarda bu keyleri gösterdik. 
+           cypress id'leri içine dinamik olarak ekliyoruz. */ }
           {sizes.map((s) => (
             <button key={s.id} type="button" onClick={() => onChange('boyut', s.id)}
               className={`!w-14 !h-14 !rounded-full !font-bold ${selectedSize === s.id ? "!bg-[#FDC913]" : "!bg-[#FAF7F2]"}`}
@@ -25,6 +39,10 @@ export default function SizeAndCrust({ selectedSize, selectedCrust, onChange }) 
           <span>{selectedCrust || "Hamur Kalınlığı Seç"}</span>
           <span className={isDropdownOpen ? "!rotate-180" : ""}>▼</span>
         </button>
+        {/* Dropdown Açıkken Görünen Seçenekler
+            Dropdown'un açık/kapalı durumunu yönetmek için isDropdownOpen state'ini kullanıyoruz.
+            Dropdown açıldığında crusts array'ini map ile render ediyoruz.
+            Bir seçenek seçildiğinde onChange fonksiyonunu çağırarak hamur bilgisini güncelliyoruz ve dropdown'u kapatıyoruz. */}
         {isDropdownOpen && (
           <div className="!absolute !w-full !bg-white !border !z-50">
             {crusts.map((c) => (

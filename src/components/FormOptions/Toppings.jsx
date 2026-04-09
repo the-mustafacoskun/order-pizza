@@ -1,6 +1,14 @@
 import React from 'react';
 
-// --- Checkbox İçin Özel İkon Bileşeni ---
+{/* Checkbox İçin Özel İkon Bileşeni */}
+{/* Bu bileşen, seçili olup olmadığına göre farklı görünümler sunar.
+input checkbox'ı gizleyip yerine stilize edilmiş bir div kullanıyoruz.
+Seçili olduğunda arka plan rengi değişir ve içine bir check ikonu eklenir. */}
+{/* label ile checkbox'ı sarmalayarak tüm alanın tıklanabilir olmasını sağlıyoruz. */}
+{/*Toppings bileşeninde bu CustomCheckbox'u kullanarak malzeme seçeneklerini oluşturacağız. 
+  ve proplar karşılanıyor buradan toppingsten gelen*/}
+{/* data-cy attribute'ları testler için eklenmiştir. */}
+
 const CustomCheckbox = ({ id, label, checked, onChange }) => {
   return (
     <label className="flex items-center gap-3 cursor-pointer group w-full m-0 p-0">
@@ -63,7 +71,7 @@ export default function Toppings({ selectedToppings, onChange }) {
     if (!selectedToppings.includes(toppingName) && selectedToppings.length >= 10) {
       return;
     }
-    onChange(toppingName); // OrderForm'daki handleChange'e gönderir
+    onChange(toppingName); // OrderForm'daki handleChange'e geri veri gönderir
   };
 
   return (
@@ -77,7 +85,9 @@ export default function Toppings({ selectedToppings, onChange }) {
         </p>
       </div>
 
-      {/* Grid Yapısı (Her Zaman 3 Sütun - Figma Uyumlu) */}
+      {/* Grid Yapısı (Her Zaman 3 Sütun - Figma Uyumlu) 
+      customcheckbox a propları gönderdik 
+      */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-2">
         {toppingsList.map((topping) => (
           <div key={topping.id} className="flex items-start">
