@@ -1,46 +1,39 @@
-import { FormGroup, Input, Label } from "reactstrap";
-import styled from "styled-components";
-const OrderNotWrapper = styled.div`
-    display:flex;
-    justify-content:center;
-    flex-direction:column;
-    margin:20px auto;
-    font-family:'Barlow', sans-serif;
-    border-bottom: 1px dotted #5F5F5F80;
+import React from 'react';
 
-`;
-const OrderNotTitle = styled.span`
-    
-    justify-content:flex-start;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-`;
-
-export default function OrderNote() {
-
+export default function OrderNote({ value, onChange }) {
     return (
-        <OrderNotWrapper>
-             <OrderNotTitle>
-                  Sipariş Notu
-                </OrderNotTitle>
-            <FormGroup>
+        <div className="flex flex-col my-5 mx-auto font-barlow border-b border-dotted border-[#5F5F5F80] pb-5">
+            {/* Başlık Kısmı (Eski OrderNotTitle) */}
+            <span className="text-xl font-bold mb-5 text-[#292929] text-left">
+                Sipariş Notu
+            </span>
 
-                <Input
-                    id="exampleText"
-                    name="text"
-                    type="textarea"
-                    placeholder="Siparişine eklemek istediğin bir not var mı?"
-                    rows="1"
-                    style={{
-                        height:'56px',
-                        resize:'none',
-                        minHeight:'56px',
-                        paddingTop:'15px',
-                        backgroundColor:'#FAF7F2'
-                    }}
-                />
-            </FormGroup>
-        </OrderNotWrapper>
+            {/* Input Kısmı (Eski Reactstrap Input) */}
+            <textarea
+                id="order-note"
+                name="orderNote"
+                placeholder="Siparişine eklemek istediğin bir not var mı?"
+                rows="1"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="
+                    w-full 
+                    h-[56px] 
+                    min-h-[56px] 
+                    pt-[15px] 
+                    px-4 
+                    bg-[#FAF7F2] 
+                    border 
+                    border-gray-200 
+                    rounded-md 
+                    resize-none 
+                    outline-none 
+                    text-[#5F5F5F]
+                    placeholder:text-[#5F5F5F]
+                    focus:border-[#FDC913]
+                    transition-colors
+                "
+            />
+        </div>
     );
 }

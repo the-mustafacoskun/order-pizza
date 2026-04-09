@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import OrderForm from './pages/OrderForm';
 import Success from './pages/Success';
 import { Switch, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [order, setOrder] = useState(null);

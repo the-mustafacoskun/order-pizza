@@ -7,23 +7,23 @@ export default function PaymentSummary({ orderData }) {
     const toplam = orderData?.toplam || orderData?.toplamFiyat || 0;
 
     return (
-        <div className="!block !p-8 !border !border-white/20 !rounded-lg !bg-[#CE2829] !text-white !font-barlow !w-full !max-w-[350px] !mx-auto !my-5">
+        <div className="block p-8 border border-white/20 rounded-lg bg-[#CE2829] text-white font-barlow w-full max-w-[350px] !mx-auto !p-6">
             
-            <h5 className="!text-xl !font-bold !mb-8 !text-white !text-left">
+            <h5 className="text-xl font-bold !mb-4 text-white text-left">
                 Sipariş Toplamı
             </h5>
 
-            <div className="!space-y-4">
+            <div className="space-y-4">
                 {/* Seçimler Satırı */}
-                <div className="!flex !justify-between !items-center !text-base !font-semibold">
-                    <span className="!opacity-80">Seçimler</span>
+                <div className="flex justify-between items-center text-base font-semibold !mb-4">
+                    <span className="opacity-80">Seçimler</span>
                     <span>{Number(secimler).toFixed(2)}₺</span>
                 </div>
 
                 {/* Toplam Satırı */}
-                <div className="!flex !justify-between !items-center !text-lg !font-bold !pt-2">
-                    <span className="!text-white">Toplam</span>
-                    <span className="!text-white">
+                <div className="flex justify-between items-center text-lg font-bold pt-2 !mb-4">
+                    <span className="text-white">Toplam</span>
+                    <span className="text-white">
                         {/* Verinin sayı olduğundan emin olarak toFixed kullanıyoruz */}
                         {Number(toplam).toFixed(2)}₺
                     </span>
@@ -31,7 +31,7 @@ export default function PaymentSummary({ orderData }) {
             </div>
 
             {/* Tasarımda varsa bir separator çizgisi eklenebilir */}
-            <div className="!mt-4 !border-t !border-white/10"></div>
+            <div className="mt-4 border-t border-white/10"></div>
         </div>
     );
 }

@@ -3,19 +3,16 @@ import MiddleNavbar from './MiddleNavbar';
 import { useHistory } from "react-router-dom";
 
 const MainCampaignAndCards = () => {
+  const history = useHistory();
+  const handleButtonClick = () => history.push('/pizza');
+
   const foodItems = [
     { name: "Terminal Pizza", rating: 4.9, count: 200, price: 60, img: "food-1.png" },
     { name: "Position Absolute Acı Pizza", rating: 4.9, count: 120, price: 60, img: "food-2.png" },
     { name: "useEffect Tavuklu Burger", rating: 4.8, count: 150, price: 75, img: "food-3.png" },
   ];
-  const history = useHistory();
 
-  const handleButtonClick = () => {
-    history.push('/pizza');
-  }
-
-  // Ortak Buton Tasarımı (Mobilde Full genişlik, Masaüstünde otomatik genişlik)
-  const buttonClass = "!bg-white !text-[#CE2829] !px-10 !py-3 !rounded-full !font-bold !uppercase !text-xs !border-none !cursor-pointer  md:!w-auto !text-center";
+  const buttonClass = "!bg-white !text-[#CE2829] !px-10 !py-3 !rounded-full !font-bold !uppercase !text-xs !border-none !cursor-pointer md:!w-auto !text-center";
 
   return (
     <main className="!bg-[#FAF7F2] !w-full !py-16 !font-['Barlow']">
@@ -23,53 +20,38 @@ const MainCampaignAndCards = () => {
         
         {/* Kampanya Kartları Grid */}
         <section className="!grid !grid-cols-1 md:!grid-cols-2 !gap-4 !mb-20">
-          
-          {/* Sol Büyük Kart */}
           <div 
-            className="!bg-[#CE2829] !bg-cover !bg-center !bg-no-repeat !rounded-2xl !p-10 md:!p-12 !min-h-[400px] md:!h-[450px] !flex !flex-col !items-start !justify-start !text-white !relative !overflow-hidden"
+            className="!bg-[#CE2829] !bg-cover !bg-center !rounded-2xl !p-10 !min-h-[400px] !flex !flex-col !items-start !text-white"
             style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-1.png')" }}
           >
-            <h2 className="!font-['Quattrocento'] !text-5xl md:!text-6xl !font-bold !leading-[1.1] !mb-4 !mt-4">Özel<br />Lezzetus</h2>
+            <h2 className="!font-['Quattrocento'] !text-5xl !font-bold !leading-[1.1] !mb-4">Özel<br />Lezzetus</h2>
             <p className="!text-xl !font-medium !mb-8">Position:Absolute Acı Burger</p>
-            <button className={buttonClass} onClick={handleButtonClick}>
-              SİPARİŞ VER
-            </button>
+            <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
           </div>
           
-          {/* Sağ Kolon */}
           <div className="!flex !flex-col !gap-4">
-            {/* Sağ Üst Kart */}
-            <div 
-              className="!bg-[#292929] !bg-cover !bg-center !bg-no-repeat !rounded-2xl !p-10 !min-h-[400px] md:!min-h-0 md:!flex-1 !flex !flex-col !items-start !justify-center !text-white"
-              style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-2.png')" }}
-            >
-              <h3 className="!text-2xl !font-bold !mb-6 !leading-tight">Hackathlon<br />Burger Menü</h3>
-              <button className={buttonClass} onClick={handleButtonClick}>
-                SİPARİŞ VER
-              </button>
+            <div className="!bg-[#292929] !bg-cover !rounded-2xl !p-10 !flex-1 !flex !flex-col !items-start !text-white"
+              style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-2.png')" }}>
+              <h3 className="!text-2xl !font-bold !mb-6">Hackathlon<br />Burger Menü</h3>
+              <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
             </div>
-            
-            {/* Sağ Alt Kart */}
-            <div 
-              className="!bg-[#FDC913] !bg-cover !bg-center !bg-no-repeat !rounded-2xl !p-10 !min-h-[400px] md:!min-h-0 md:!flex-1 !flex !flex-col !items-start !justify-center"
-              style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-3.png')" }}
-            >
-              <h3 className="!text-2xl !font-bold !mb-6 !leading-tight !text-black">
+            <div className="!bg-[#FDC913] !bg-cover !rounded-2xl !p-10 !flex-1 !flex !flex-col !items-start"
+              style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-3.png')" }}>
+              <h3 className="!text-2xl !font-bold !mb-6 !text-black">
                 <span className="!text-[#CE2829]">Çoooook</span> hızlı<br />npm gibi kurye
               </h3>
-              <button className={buttonClass} onClick={handleButtonClick}>
-                SİPARİŞ VER
-              </button>
+              <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
             </div>
           </div>
         </section>
 
-        {/* ... Alt kısım (Başlık ve Yemek Kartları) ... */}
         <div className="!text-center !mb-12">
           <p className="!font-['Satisfy'] !text-[#CE2829] !text-3xl !mb-4">en çok paketlenen menüler</p>
           <h2 className="!text-4xl !font-bold !text-[#292929]">Acıktıran Kodlara Doyuran Lezzetler</h2>
         </div>
+
         <MiddleNavbar />
+
         <section className="!grid !grid-cols-1 md:!grid-cols-3 !gap-8">
           {foodItems.map((food, i) => (
             <div key={i} className="!bg-white !p-8 !rounded-3xl !shadow-sm hover:!shadow-md !transition-shadow !cursor-pointer">

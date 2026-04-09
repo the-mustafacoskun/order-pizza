@@ -11,29 +11,28 @@ export default function UpperNavbar() {
   ];
 
   return (
-    // DÜZELTME: !py-8 ile mobilde daha ferah bir alan sağlandı, !bg-white ile arka plan sabitlendi
-    <nav className="!bg-white !border-b !border-gray-100 !py-8 !z-50">
+    <nav className="!bg-white !border-b !border-gray-100 !py-10 !z-50 !w-full">
       <div className="!max-w-[1065px] !mx-auto !px-4">
-        {/* DÜZELTME: 
-          - Mobilde 2'li dizilim için !grid !grid-cols-2 eklendi.
-          - Masaüstünde yan yana dizilim için md:!flex kullanıldı.
-          - Satır arası boşluk için !gap-y-8, sütun arası için !gap-x-4 eklendi.
+        {/* !grid-cols-2: Mobilde iki sütun yapar.
+            !pl-10: Öğeleri sayfanın soluna yanaştırmak için sol tarafa boşluk ekledik.
+            !gap-x-2: Sütunlar arası minimum grid boşluğu.
         */}
-        <ul className="!grid !grid-cols-2 md:!flex !flex-wrap !justify-between !items-center !gap-y-8 !gap-x-4 !list-none !p-0 !m-0">
+        <ul className="!grid !grid-cols-2 md:!flex !flex-wrap !justify-between !items-center !gap-y-12 !gap-x-2 !list-none !p-0 !m-0 !w-full !pl-10 md:!pl-0">
           {navItems.map((item, index) => (
-            <li key={index} className="!m-0 !p-0 !flex !justify-center md:!block">
-              {/* DÜZELTME: !no-underline ile a etiketindeki varsayılan çizgiler her durumda kaldırıldı */}
+            <li key={index} className="!m-0 !p-0 !flex !justify-start !w-full md:!w-auto">
               <a 
                 href="#" 
-                className="!flex !items-center !gap-3 !text-[#292929] !font-semibold !no-underline hover:!text-[#CE2829] !transition-colors !w-full md:!w-auto !justify-start md:!justify-center"
+                /* !w-[140px]: Bu genişlik ikonların dikeyde aynı hizada kalmasını sağlar. 
+                   Görüntüdeki genişliğe göre 140px-160px arası idealdir.
+                */
+                className="!flex !items-center !gap-4 !text-[#292929] !font-semibold !no-underline hover:!text-[#CE2829] !transition-colors !w-[140px] md:!w-auto"
               >
-                {/* DÜZELTME: İkon boyutu mobilde daha net görünmesi için !w-10 yapıldı */}
                 <img 
                   src={`/images/iteration-2-images/icons/${item.icon}`} 
                   alt={item.name} 
-                  className="!w-10 !h-10 !object-contain" 
+                  /* İkon boyutları görüntüdeki gibi net ve belirgin */
+                  className="!w-12 !h-12 !object-contain" 
                 />
-                {/* DÜZELTME: Metinlerin alt satıra kaymaması için !whitespace-nowrap eklendi */}
                 <span className="!text-sm md:!text-base !whitespace-nowrap">{item.name}</span>
               </a>
             </li>
