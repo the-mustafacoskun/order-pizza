@@ -12,7 +12,7 @@ export default function PizzaHeader() {
     };
 
     return (
-        <div className="flex flex-col w-full items-start mx-auto font-barlow gap-4 !mb-10">
+        <div className="flex flex-col w-full items-start mx-auto font-barlow gap-4 !mb-10 !px-4">
 
             {/* Banner - Dikey Çevrilmiş */}
             <img

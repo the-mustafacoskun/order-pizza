@@ -17,34 +17,54 @@ const MainCampaignAndCards = () => {
   return (
     <main className="!bg-[#FAF7F2] !w-full !py-16 !font-['Barlow']">
       <div className="!max-w-[1065px] !mx-auto !px-4">
-        
-        {/* Kampanya Kartları Grid */}
+
         <section className="!grid !grid-cols-1 md:!grid-cols-2 !gap-4 !mb-20">
-          <div 
-            className="!bg-[#CE2829] !bg-cover !bg-center !rounded-2xl !p-10 !min-h-[400px] !flex !flex-col !items-start !text-white"
+
+          {/* KART 1: ANA KART (Buton yerini değiştirmedik, orijinal hali) */}
+          <div
+            className="!bg-[#CE2829] !bg-cover !bg-center !rounded-2xl !p-10 !min-h-[400px] !flex !flex-col !justify-start !items-start !text-white"
             style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-1.png')" }}
           >
-            <h2 className="!font-['Quattrocento'] !text-5xl !font-bold !leading-[1.1] !mb-4">Özel<br />Lezzetus</h2>
-            <p className="!text-xl !font-medium !mb-8">Position:Absolute Acı Burger</p>
+            <h2 className="!font-['Quattrocento'] !text-4xl md:!text-5xl !font-bold !leading-[1.1] !mb-4">
+              Özel<br />Lezzetus
+            </h2>
+            <p className="!text-lg md:!text-xl !font-medium !mb-8">
+              Position:Absolute Acı Burger
+            </p>
             <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
           </div>
-          
-          <div className="!flex !flex-col !gap-4">
-            <div className="!bg-[#292929] !bg-cover !rounded-2xl !p-10 !flex-1 !flex !flex-col !items-start !text-white"
+
+          {/* SAĞ TARAF KAPSAYICI */}
+          <div className="!flex !flex-col !gap-4 md:!h-[400px]">
+
+            {/* KART 2 */}
+            <div className="!bg-[#292929] !bg-cover !bg-center !rounded-2xl !p-10 !flex-1 !min-h-[400px] md:!min-h-0 !flex !flex-col !justify-start !items-start !text-white"
               style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-2.png')" }}>
-              <h3 className="!text-2xl !font-bold !mb-6">Hackathlon<br />Burger Menü</h3>
+
+              {/* DEĞİŞİKLİK: !mb-28 (Mobilde butonu aşağı iter), 
+         md:!mb-6 (Webde eski haline döndürür) 
+      */}
+              <h3 className="!text-3xl md:!text-2xl !font-bold !leading-[1.2] !mb-28 md:!mb-6">
+                Hackathlon<br />Burger Menü
+              </h3>
+
               <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
             </div>
-            <div className="!bg-[#FDC913] !bg-cover !rounded-2xl !p-10 !flex-1 !flex !flex-col !items-start"
+
+            {/* KART 3 */}
+            <div className="!bg-[#FDC913] !bg-cover !bg-center !rounded-2xl !p-10 !flex-1 !min-h-[400px] md:!min-h-0 !flex !flex-col !justify-start !items-start"
               style={{ backgroundImage: "url('/images/iteration-2-images/cta/kart-3.png')" }}>
-              <h3 className="!text-2xl !font-bold !mb-6 !text-black">
+
+              {/* Kart 2 ile aynı boşluğu verdik */}
+              <h3 className="!text-3xl md:!text-2xl !font-bold !leading-[1.2] !mb-28 md:!mb-6 !text-black">
                 <span className="!text-[#CE2829]">Çoooook</span> hızlı<br />npm gibi kurye
               </h3>
+
               <button className={buttonClass} onClick={handleButtonClick}>SİPARİŞ VER</button>
             </div>
+
           </div>
         </section>
-
         <div className="!text-center !mb-12">
           <p className="!font-['Satisfy'] !text-[#CE2829] !text-3xl !mb-4">en çok paketlenen menüler</p>
           <h2 className="!text-4xl !font-bold !text-[#292929]">Acıktıran Kodlara Doyuran Lezzetler</h2>
