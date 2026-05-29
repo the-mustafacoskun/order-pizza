@@ -486,4 +486,4 @@ React concepts used while developing this project:
 
 ---
 
-**Made with ❤️ by Mustafa Coşkun for Workintech Sprint 8 Challenge**
+**Made with ❤️ by Mustafa Coşkun **
