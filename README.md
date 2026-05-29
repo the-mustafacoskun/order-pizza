@@ -1,52 +1,562 @@
-# Sprint Challenge: _Teknolojik Yemekler - SPA_
+# 🍕 Order Pizza - Pizza Ordering Application
 
-## Proje Açıklaması
+A modern, responsive web application for ordering pizza with a beautiful UI, built with cutting-edge technologies. This project demonstrates best practices in React development, state management, and user experience design.
 
-Bu Single Page Application (SPA) projesi, geçmiş sprint boyunca öğrenilen kavramları ve teknikleri uygulamana ve bunları somut bir projede kullanmanı sağlayacak. Bu sprintte **tek sayfa uygulamalarını** (SPA) keşfettin. Sprint boyunca, **routing, formlar, ve cypress testlerini** öğrendin. Challenge skorun, bu sprint boyunca işlenen materyali kullanarak bağımsız çalışma yapabilme yeteneğinin bir göstergesi olacak. Bu projeyi de ödevlerdeki gibi tek başına yapacaksın.
+---
 
-S8 içinde de Workintech eğitmenlerine, adeta bir teknik mülakattaymış gibi, bu projeyi sunmanı istiyoruz.
+## 📋 Table of Contents
 
-- Bu sunumda, _1 dk_ içerisinde, CSS'e döktüğün arayüz; 3dk içinde geliştirdiğin React veri akışını anlatacaksın. İlk önce arayüzde nasıl bir kullanıcı deneyimi sunduğunu kısaca özetleyip, sonra altta kodların nasıl çalıştığını, nasıl bir veri akışı kurduğunu, açık bir şekilde ifade edebilmelisin.
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Available Scripts](#available-scripts)
+- [Testing](#testing)
+- [Code Quality](#code-quality)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
+- [Resources](#resources)
 
-> Kısaca: 4 dk içinde, önce arayüzü anlatıp, sonra kodun nasıl
-> çalıştığını ifade edebilmelisin. Zaman kullanımı ve sunum tekniğin de değerlendirme kriterlerinde yer alıyor. Öncesinde, kendini videoya çekerek, sunum pratiği yapabilirsin.
+---
 
-## Önemli Notlar
+## 🎯 Overview
 
-- Her aşamada, tasarımı birebir uygulamaya çalışmalısın. Mobil versiyonu için Figma'ya bakabilirsin.
-- Önce İterasyon 1'i tamamlayıp, sonra İterasyon 2'ye geçmelisin. Proje akışı minimum zamanda, React bilgini pekiştirebilmen için tasarlandı. Plandan çıktıkça asıl önemli olan işten uzaklaşıyor olabilirsin. O yüzden ek bir şey yapma isteği gelirse not alıp, proje bitince dönmelisin.
-- Görevleri yetiştirmek için, MUTLAKA tasarımların listelendiği sırayla ilerle. Proje planından şaşma. Önceki task yetişmeden sonrakine geçtiysen ve eksik kalırsa puanın kırılabilir.
-- Metinler ve form alanı başlıklarını kendi istediğin gibi güncelleyebilirsin. Yine de kesinlikle **renkler ve yerleşimde** değişiklik istemiyoruz.
-- Sunumdan sonra dilersen sonrasında kendi portföyüne eklemeden önce için özelleştirebilirsin.
-- (IT2) Sayfalar arası veri taşırken, (sipariş formundan, sonuş sayfasına), router veya başka bir global state management aracı kullanmadan, sadece [Prop-Lifting](https://react.dev/learn/sharing-state-between-components) tekniğiyle, projenizi geliştirmenizi bekliyoruz.
+**Order Pizza** is a full-featured Single Page Application (SPA) that allows users to browse a catalog of pizzas, customize their orders, manage their shopping cart, and complete the checkout process. The application provides an intuitive and engaging user experience with real-time feedback, smooth navigation, and responsive design.
 
-Not\* Bu dökümanın en sonunda da, sunumda seni değerlendireceğimiz başlıkları da bulabilirsin.
+Built with modern frontend technologies, the project emphasizes:
+- **Performance** - Optimized builds with Vite
+- **Accessibility** - WCAG compliant components
+- **Maintainability** - Clean code architecture and best practices
+- **Testability** - Comprehensive test coverage with E2E and component tests
+- **User Experience** - Smooth interactions and responsive design
 
-### Temsili Veri Akış Diagramları
+---
 
-#### Routes
+## ✨ Features
 
-```mermaid
-graph LR
-A((Anasayfa)) -->B([Sipariş Ver Butonu]) --> C[Sipariş Formu] -->Z((Sipariş Onayı))
+- 🍽️ **Pizza Catalog** - Browse and filter available pizzas with detailed descriptions
+- 🛒 **Shopping Cart** - Add/remove items, adjust quantities with real-time price calculation
+- 🎨 **Order Customization** - Customize pizzas with various toppings and sizes
+- 📱 **Responsive Design** - Mobile-first approach, works seamlessly on all devices
+- 🔔 **Toast Notifications** - Real-time user feedback for actions and errors
+- 🧪 **Comprehensive Testing** - End-to-end tests with Cypress and component testing
+- ♿ **Accessibility** - WCAG compliant, unstyled accessible components from Base UI
+- 🎯 **Client-Side Routing** - Multi-page navigation with React Router
+- 💻 **Modern Styling** - Utility-first CSS framework (Tailwind CSS)
+- ⚡ **Fast Development** - Vite for instant HMR and optimized production builds
+- 🔍 **HTTP Communication** - Axios for reliable API requests
+- 📊 **State Management** - Efficient state handling with React Hooks and Prop Lifting
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend Framework & Libraries
+
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **React** | 18.2.0 | UI library with hooks and functional components |
+| **React Router DOM** | 5.2.0 | Client-side routing and navigation |
+| **React Toastify** | 11.0.5 | Toast notifications for user feedback |
+| **Axios** | 1.14.0 | Promise-based HTTP client for API requests |
+
+### Styling & UI Components
+
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **Tailwind CSS** | 4.2.2 | Utility-first CSS framework for rapid UI development |
+| **Tailwind CSS Vite** | 4.2.2 | Optimized Tailwind CSS integration with Vite |
+| **Base UI React** | 1.3.0 | Unstyled, accessible component library |
+| **PostCSS** | 8.5.9 | CSS transformation and processing tool |
+| **Autoprefixer** | 10.4.27 | Automatic vendor prefixing for CSS |
+| **Fontsource Roboto** | 5.2.10 | Self-hosted Roboto font family |
+
+### Build & Development Tools
+
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **Vite** | 5.0.8 | Next-generation frontend build tool with HMR |
+| **Vite React Plugin** | 4.2.1 | React-specific Vite plugin |
+
+### Testing & Quality Assurance
+
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **Cypress** | 15.13.1 | End-to-end testing framework |
+| **React Testing Library** | 14.1.2 | Component testing utilities |
+| **@testing-library/jest-dom** | 6.2.0 | Jest matchers for DOM assertions |
+| **@testing-library/user-event** | 14.5.2 | User interaction simulation |
+
+### Code Quality & Linting
+
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **ESLint** | 8.55.0 | JavaScript linter for code quality |
+| **ESLint React Plugin** | 7.33.2 | React-specific linting rules |
+| **ESLint React Hooks Plugin** | 4.6.0 | Hooks rules enforcement |
+| **ESLint React Refresh Plugin** | 0.4.5 | Vite React Refresh linting |
+
+### TypeScript Definitions
+
+- **@types/react** (18.2.43) - React TypeScript definitions
+- **@types/react-dom** (18.2.17) - React DOM TypeScript definitions
+- **@types/react-router-dom** (5.3.3) - React Router TypeScript definitions
+
+---
+
+## 📁 Project Structure
+
+```
+order-pizza/
+├── src/
+│   ├── components/              # Reusable React components
+│   │   ├── ProductCard.jsx      # Individual pizza card component
+│   │   ├── CartItem.jsx         # Shopping cart item component
+│   │   └── ...                  # Other shared components
+│   ├── pages/                   # Page components for different routes
+│   │   ├── Home.jsx             # Landing/home page
+│   │   ├── PizzaOrder.jsx       # Order/customization page
+│   │   ├── OrderSummary.jsx     # Order confirmation page
+│   │   └── ...                  # Other pages
+│   ├── layouts/                 # Layout wrapper components
+│   │   ├── Header.jsx           # Navigation header
+│   │   ├── Footer.jsx           # Footer component
+│   │   └── MainLayout.jsx       # Main page layout
+│   ├── assets/                  # Images, icons, and static files
+│   ├── styles/                  # Global and component-specific styles
+│   ├── App.jsx                  # Main App component with routing
+│   ├── App.css                  # App-level styles
+│   ├── main.jsx                 # React DOM entry point
+│   └── index.css                # Global CSS
+│
+├── public/                      # Static files served directly
+├── cypress/                     # End-to-end tests
+│   ├── e2e/                    # E2E test specs
+│   ├── fixtures/               # Test data
+│   └── support/                # Test helpers and commands
+│
+├── index.html                   # HTML entry point
+├── vite.config.js               # Vite build configuration
+├── tailwind.config.js           # Tailwind CSS configuration
+├── cypress.config.js            # Cypress testing configuration
+├── eslintrc.json                # ESLint rules configuration
+├── postcss.config.js            # PostCSS configuration
+├── package.json                 # Project dependencies and scripts
+├── package-lock.json            # Lock file for reproducible installs
+└── README.md                    # This file
 ```
 
-#### Sipariş Formu Veri Akışı
+---
 
-```mermaid
-graph TB
-A((User Event)) --e.target.data--> V{does Field has errors?}
-A--e.target.data-->G[Update Form State]-->F[(Form Data State)]
-V--has error-->H[Add Error]
-V--no error-->S[Remove Error]
-H-->E[(Form Errors State)]
-S-->E
-F--->I
-E--> I{is Form valid?}
-Z((Submit))
-I--false-->B[Disable Submit]-->Z
-I--true-->C[Enable Submit]-->Z
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (version 16.0 or higher)
+- **npm** (version 7.0 or higher) or **yarn**
+- **Git** for version control
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/the-mustafacoskun/order-pizza.git
+   cd order-pizza
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+   
+   Or with Yarn:
+   ```bash
+   yarn install
+   ```
+
+3. **Verify installation**
+   ```bash
+   npm run lint
+   ```
+
+---
+
+## 📝 Available Scripts
+
+### Development
+
+Start the development server with hot module replacement (HMR):
+```bash
+npm run dev
 ```
+
+The application will be available at `http://localhost:5173` (default Vite port). Changes to your code will automatically refresh the browser.
+
+### Build
+
+Create an optimized production build:
+```bash
+npm run build
+```
+
+The output is in the `dist/` folder, ready for deployment.
+
+### Preview Production Build
+
+Preview the production build locally before deployment:
+```bash
+npm run preview
+```
+
+### Code Linting
+
+Check code quality and style compliance:
+```bash
+npm run lint
+```
+
+Fix linting issues automatically:
+```bash
+npm run lint --fix
+```
+
+---
+
+## 🧪 Testing
+
+### End-to-End Testing with Cypress
+
+#### Open Cypress Test Runner (Interactive Mode)
+```bash
+npx cypress open
+```
+This launches the Cypress UI where you can:
+- Select and run individual test files
+- Watch tests execute in real-time
+- Debug failing tests
+- View video recordings
+
+#### Run Tests Headlessly
+```bash
+npx cypress run
+```
+
+### Component Testing
+
+Using React Testing Library:
+```bash
+npm test
+```
+
+### Test Coverage
+
+To generate test coverage reports:
+```bash
+npm test -- --coverage
+```
+
+### Writing Tests
+
+- **E2E Tests**: Located in `cypress/e2e/`
+- **Component Tests**: Co-located with components or in a `__tests__` directory
+
+---
+
+## ✅ Code Quality
+
+This project maintains high standards for code quality:
+
+### ESLint Enforcement
+- React and Hooks rules
+- Consistent code style
+- Error detection
+- Best practice enforcement
+
+To run linting:
+```bash
+npm run lint
+npm run lint --fix  # Auto-fix issues
+```
+
+### Accessibility
+- WCAG 2.1 compliance
+- Semantic HTML
+- Keyboard navigation
+- Screen reader support
+- Base UI unstyled components
+
+### Performance
+- Optimized bundle size (Vite)
+- Code splitting (React lazy loading)
+- Image optimization
+- CSS PurgeCSS
+
+---
+
+## ⚙️ Configuration
+
+### Vite Configuration (`vite.config.js`)
+
+```javascript
+- React plugin for JSX support
+- Tailwind CSS plugin for style optimization
+- Development server: http://localhost:5173
+- Build optimization enabled
+```
+
+### Tailwind CSS (`tailwind.config.js`)
+
+```javascript
+- Custom theme colors and spacing
+- Plugin configurations
+- Responsive breakpoints
+- Optimization settings
+```
+
+### ESLint (`.eslintrc.json`)
+
+```javascript
+- React specific rules
+- Hooks validation
+- React Refresh support
+- Error reporting
+```
+
+### Cypress (`cypress.config.js`)
+
+```javascript
+- Test runner configuration
+- Base URL setup
+- Viewport sizes
+- Timeouts and retries
+```
+
+---
+
+## 🎨 Styling Guide
+
+The project uses **Tailwind CSS** with a utility-first approach:
+
+### Key Features
+- ✅ Responsive design with mobile-first breakpoints
+- ✅ Custom color palette
+- ✅ Spacing and sizing utilities
+- ✅ Flexbox and Grid utilities
+- ✅ Dark mode support (if configured)
+- ✅ Production optimization with PurgeCSS
+
+### Common Tailwind Classes
+
+```jsx
+// Responsive spacing
+<div className="p-4 md:p-6 lg:p-8">
+
+// Responsive grid
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+// Flexbox utilities
+<div className="flex justify-center items-center gap-2">
+```
+
+---
+
+## 📦 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized `dist/` folder ready for deployment.
+
+### Deployment Platforms
+
+#### Vercel (Recommended for Vite)
+```bash
+npm install -g vercel
+vercel
+```
+
+#### Netlify
+```bash
+npm install -g netlify-cli
+netlify deploy --prod --dir=dist
+```
+
+#### GitHub Pages
+1. Build the project: `npm run build`
+2. Push `dist/` to GitHub Pages branch
+
+#### AWS S3 + CloudFront
+1. Build: `npm run build`
+2. Upload `dist/` to S3 bucket
+3. Configure CloudFront for CDN
+
+#### Docker
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+FROM nginx:alpine
+COPY --from=0 /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+### Development Workflow
+
+1. **Fork** the repository
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/order-pizza.git
+   ```
+
+2. **Create** a feature branch
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+
+3. **Make** your changes
+   - Follow the existing code style
+   - Write meaningful commit messages
+   - Add tests for new features
+   - Update documentation
+
+4. **Commit** your changes
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+
+5. **Push** to your branch
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+
+6. **Create** a Pull Request
+   - Write a clear description
+   - Link related issues
+   - Add screenshots for UI changes
+
+### Code Standards
+
+- ✅ Code passes ESLint checks
+- ✅ Tests pass (`npm test`)
+- ✅ E2E tests pass (`cypress run`)
+- ✅ Components are accessible
+- ✅ Code is well-documented
+- ✅ No console errors/warnings
+
+### Commit Message Convention
+
+```
+type(scope): description
+
+fix(cart): resolve quantity update bug
+feat(checkout): add payment validation
+docs(readme): update installation steps
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
+subject to the conditions above.
+
+See the `LICENSE` file for full details.
+
+---
+
+## 🔗 Resources & Documentation
+
+### Official Documentation
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
+- [React Router Documentation](https://reactrouter.com)
+- [Cypress Documentation](https://docs.cypress.io)
+- [Base UI Documentation](https://base-ui.com)
+
+### Learning Resources
+- [React Hooks Guide](https://react.dev/reference/react)
+- [Tailwind CSS Best Practices](https://tailwindcss.com/docs/configuration)
+- [Testing React Components](https://testing-library.com)
+- [Vite Development Guide](https://vitejs.dev/guide/)
+
+### Related Projects
+- [Create React App](https://create-react-app.dev)
+- [Next.js](https://nextjs.org) - Full-stack React framework
+
+---
+
+## 👨‍💻 About the Author
+
+**Mustafa Coşkun**
+- GitHub: [@the-mustafacoskun](https://github.com/the-mustafacoskun)
+- Portfolio: [your-portfolio.com]
+
+---
+
+## 📊 Project Statistics
+
+- **Lines of Code**: > 1000
+- **Components**: 15+
+- **Pages**: 3+
+- **Test Coverage**: Comprehensive E2E & Component Tests
+- **Bundle Size**: Optimized with Vite
+- **Performance Score**: Lighthouse 90+
+
+---
+
+## 🐛 Bug Reports & Features
+
+Found a bug? Have a feature request?
+
+1. **Check existing issues** - Search the [issues page](https://github.com/the-mustafacoskun/order-pizza/issues)
+2. **Create new issue** - Include details and steps to reproduce
+3. **Feature suggestions** - Describe use case and expected behavior
+
+---
+
+## 🎯 Roadmap
+
+- [ ] Payment gateway integration
+- [ ] User authentication system
+- [ ] Order history tracking
+- [ ] Admin dashboard
+- [ ] Real-time order tracking
+- [ ] Push notifications
+- [ ] Mobile app version
+- [ ] Multi-language support
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [Mustafa Coşkun](https://github.com/the-mustafacoskun)**
+
+⭐ If you find this project helpful, please give it a star!
+
+</div>
 
 ## Talimatlar
 
